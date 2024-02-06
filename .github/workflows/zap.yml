@@ -63,3 +63,4 @@ jobs:
           format: openapi
           target: "https://localhost:9000/openapi"
           cmd_options: '-a'
+          allow_issue_writing: false
