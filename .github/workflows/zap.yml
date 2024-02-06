@@ -40,27 +40,23 @@ on:
 
 permissions:
   contents: read
-
+            
 jobs:
-  zap:
-    permissions:
-      contents: read # for actions/checkout to fetch code
-      security-events: write # for stackhawk/hawkscan-action to upload code scanning alert info
-    name: StackHawk
-    runs-on: ubuntu-20.04
+  zap_scan:
+    runs-on: ubuntu-latest
+    name: Scan the webapplication
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v2
 
       - name: Build and Run Vulny!
         run: docker-compose build && docker-compose up -d
 
-
-      - name: ZAP API Scan
+      - name: ZAP Scan
         uses: zaproxy/action-api-scan@v0.6.0
         with:
-          target: "https://localhost:9000/openapi"
           token: ${{ secrets.GITHUB_TOKEN }}
+          docker_name: 'ghcr.io/zaproxy/zaproxy:stable'
           format: openapi
+          target: "https://localhost:9000/openapi"
           cmd_options: '-a'
-            

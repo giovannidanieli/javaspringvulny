@@ -30,12 +30,6 @@
 name: "StackHawk"
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-  schedule:
-    - cron: '41 20 * * 0'
   workflow_call:
 
 permissions:
