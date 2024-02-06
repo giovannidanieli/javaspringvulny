@@ -27,7 +27,7 @@
 #     start your service so that it can be scanned with the "Run HawkScan" step.
 
 
-name: "StackHawk"
+name: "ZAP"
 
 on:
   push:
@@ -42,7 +42,7 @@ permissions:
   contents: read
 
 jobs:
-  stackhawk:
+  zap:
     permissions:
       contents: read # for actions/checkout to fetch code
       security-events: write # for stackhawk/hawkscan-action to upload code scanning alert info
@@ -62,5 +62,5 @@ jobs:
           target: "https://localhost:9000/openapi"
           token: ${{ secrets.GITHUB_TOKEN }}
           format: openapi
-          cmd_options: '-a -J'
+          cmd_options: '-a'
             
